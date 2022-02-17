@@ -9,11 +9,10 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "users", 
+@Table(name = "users",
     uniqueConstraints = { 
       @UniqueConstraint(columnNames = "username"),
       @UniqueConstraint(columnNames = "email") 
@@ -23,11 +22,18 @@ public class Users {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @Column(unique = true)
+
+  @NotBlank
+  @Size(max = 20)
   private String username;
-  @Column(unique = true)
+
+  @NotBlank
+  @Size(max = 50)
+  @Email
   private String email;
 
+  @NotBlank
+  @Size(max = 120)
   private String password;
 
   @ManyToMany(fetch = FetchType.LAZY)

@@ -16,7 +16,6 @@ public class SignupRequest {
   @Email
   private String email;
 
-  @NotBlank
   private Dpt dpt;
 
   private Set<String> role;
