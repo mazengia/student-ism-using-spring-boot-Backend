@@ -7,10 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spring-boot-security-jwt" />
         <module name="student_back_end" />
+        <module name="spring-boot-security-jwt" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="student_back_end" target="14" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
