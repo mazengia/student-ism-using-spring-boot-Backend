@@ -10,7 +10,7 @@ import org.springframework.hateoas.RepresentationModel;
 @AllArgsConstructor
 public class DepartmentDTO extends RepresentationModel<DepartmentDTO> {
     private long id;
-    private  String name;
     private  String code;
+    private  String name;
 
 }

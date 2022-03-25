@@ -1,6 +1,7 @@
 package com.maze.student.Dpt;
 
 import com.maze.student.exception.ResourceNotFoundException;
+import com.maze.student.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/department-program-type")
-public class DptController {
+public class DptController   implements SecuredRestController {
 
     DptService dptService;
 

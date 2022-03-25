@@ -1,5 +1,6 @@
 package com.maze.student.Score;
 
+import com.maze.student.security.SecuredRestController;
 import org.springframework.hateoas.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/result")
-public class ResultController {
+public class ResultController   implements SecuredRestController {
 
     ResultService resultService;
 

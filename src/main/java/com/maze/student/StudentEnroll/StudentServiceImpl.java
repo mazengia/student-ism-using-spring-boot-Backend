@@ -22,14 +22,17 @@ public class StudentServiceImpl implements StudentService {
         pageRequest = PageRequest.of(page, size);
         Page<StudentEnrolment> studentEnrolments = studentRepository.findAll(pageRequest);
         if (!CollectionUtils.isEmpty(studentEnrolments.getContent()))
-            return pagedResourcesAssembler.toModel(studentEnrolments, studentAssembler);
+            return pagedResourcesAssembler.toModel(
+                    studentEnrolments, studentAssembler);
 
         return null;
     }
 
     @Override
-    public StudentDTO addStudent(StudentEnrolment studentEnrolment) {
-        return studentAssembler.toModel(studentRepository.save(studentEnrolment));
+    public StudentDTO enrollStudent(StudentEnrolment studentEnrolment) {
+        return studentAssembler.toModel(
+                studentRepository.save(studentEnrolment)
+        );
     }
 
     @Override

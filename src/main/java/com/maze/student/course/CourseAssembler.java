@@ -10,8 +10,8 @@ public class CourseAssembler implements RepresentationModelAssembler<Course, Cou
     public CourseDTO toModel(Course course) {
         return new CourseDTO(
                 course.getId(),
-                course.getName(),
                 course.getCode(),
+                course.getName(),
                 course.getCreditHour(),
                 course.getEcts(),
                 course.getDepartment()

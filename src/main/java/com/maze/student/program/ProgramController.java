@@ -1,6 +1,8 @@
 package com.maze.student.program;
 
+import com.maze.student.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/programs")
-public class ProgramController {
+public class ProgramController   implements SecuredRestController {
 
     ProgramService programService;
 
@@ -40,5 +42,18 @@ public class ProgramController {
         ProgramDTO programDTO = programService.findProgramById(id);
         if (programDTO != null) return ResponseEntity.ok(programDTO);
         return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Long> deleteProgram(@PathVariable Long id) {
+
+        var isRemoved = programService.deleteProgramById(id);
+
+        if (isRemoved == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

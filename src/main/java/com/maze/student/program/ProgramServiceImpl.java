@@ -1,5 +1,7 @@
 package com.maze.student.program;
 
+import com.maze.student.Role.Roles;
+import com.maze.student.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -7,6 +9,8 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+
+import java.util.Collections;
 
 @Service
 @AllArgsConstructor
@@ -39,5 +43,15 @@ public class ProgramServiceImpl implements ProgramService {
             return programAssembler.toModel(programs);
         }
         return null;
+    }
+
+    @Override
+    public ProgramDTO deleteProgramById(Long id)  throws ResourceNotFoundException {
+        Programs programs = programRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException(
+                        "Program with ID :" + id + " Not Found!")
+        );
+        programRepository.deleteById(programs.getId());
+        return programAssembler.toModel(programs);
     }
 }

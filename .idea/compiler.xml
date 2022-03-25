@@ -11,9 +11,6 @@
         <module name="spring-boot-security-jwt" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="student_back_end" target="14" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

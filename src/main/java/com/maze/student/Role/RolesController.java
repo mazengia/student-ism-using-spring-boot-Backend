@@ -1,5 +1,6 @@
 package com.maze.student.Role;
 
+import com.maze.student.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import javax.validation.Valid;
 //@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/role")
-public class RolesController {
+public class RolesController  implements SecuredRestController {
 
     RolesService rolesService;
 

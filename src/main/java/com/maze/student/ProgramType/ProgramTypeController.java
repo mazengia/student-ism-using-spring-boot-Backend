@@ -1,6 +1,8 @@
 package com.maze.student.ProgramType;
 
+import com.maze.student.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/program-type")
-public class ProgramTypeController {
+public class ProgramTypeController   implements SecuredRestController {
 
     ProgramTypeService programTypeService;
 
@@ -40,5 +42,18 @@ public class ProgramTypeController {
         ProgramTypeDTO programTypeDTO = programTypeService.findProgramTypeById(id);
         if (programTypeDTO != null) return ResponseEntity.ok(programTypeDTO);
         return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Long> deleteProgramType(@PathVariable Long id) {
+
+        var isRemoved = programTypeService.deleteProgramTypeById(id);
+
+        if (isRemoved == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.maze.student.StudentEnroll;
 
+import com.maze.student.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -8,14 +9,15 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/student-enroll")
-public class StudentController {
+
+public class StudentController implements SecuredRestController {
 
     StudentService studentService;
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public StudentDTO addStudent(@RequestBody StudentEnrolment studentEnrolment) {
-         return studentService.addStudent(studentEnrolment);
+         return studentService.enrollStudent(studentEnrolment);
     }
 
     public StudentController(StudentService studentService) {

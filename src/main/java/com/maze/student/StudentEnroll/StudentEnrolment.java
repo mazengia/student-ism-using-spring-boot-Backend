@@ -33,5 +33,5 @@ public class StudentEnrolment {
 
     @ManyToOne
     @JoinColumn(  name = "studentId" )
-    private Users systemUser;
+    private Users student;
 }

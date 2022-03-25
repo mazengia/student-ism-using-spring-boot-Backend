@@ -1,5 +1,7 @@
 package com.maze.student.Status;
 
+import com.maze.student.Role.Roles;
+import com.maze.student.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,5 +41,15 @@ public class StatusServiceImpl implements StatusService {
             return statusAssembler.toModel(status);
         }
         return null;
+    }
+
+    @Override
+    public StatusDTO deleteById(Long id) throws ResourceNotFoundException {
+        Status status = statusRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException(
+                        "Status with ID :" + id + " Not Found!")
+        );
+        statusRepository.deleteById(status.getId());
+        return statusAssembler.toModel(status);
     }
 }

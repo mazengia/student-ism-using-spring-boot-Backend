@@ -1,5 +1,6 @@
 package com.maze.student.CourseEnroll;
 
+import com.maze.student.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/course-enrol")
-public class CourseEnrollController {
+public class CourseEnrollController   implements SecuredRestController {
 
     CourseEnrollService courseEnrollService;
 

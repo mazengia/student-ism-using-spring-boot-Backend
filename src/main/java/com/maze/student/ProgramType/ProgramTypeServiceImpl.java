@@ -1,5 +1,8 @@
 package com.maze.student.ProgramType;
 
+import com.maze.student.exception.ResourceNotFoundException;
+import com.maze.student.program.ProgramDTO;
+import com.maze.student.program.Programs;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,5 +42,15 @@ public class ProgramTypeServiceImpl implements ProgramTypeService {
             return programTypeAssembler.toModel(programType);
         }
         return null;
+    }
+
+    @Override
+    public ProgramTypeDTO deleteProgramTypeById(Long id) throws ResourceNotFoundException {
+        ProgramType programType = programTypeRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException(
+                        "Program type with ID :" + id + " Not Found!")
+        );
+        programTypeRepository.deleteById(programType.getId());
+        return programTypeAssembler.toModel(programType);
     }
 }

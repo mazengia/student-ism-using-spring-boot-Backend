@@ -5,7 +5,7 @@ import org.springframework.hateoas.CollectionModel;
 public interface StudentService {
     CollectionModel<StudentDTO> findAll(int page, int size );
 
-    StudentDTO addStudent(StudentEnrolment studentEnrolment);
+    StudentDTO enrollStudent(StudentEnrolment studentEnrolment);
 
     StudentDTO findStudentById(Long id);
 }

@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.maze.student.security.SecuredRestController;
 import com.maze.student.security.jwt.JwtUtils;
 import com.maze.student.security.services.UserDetailsImpl;
 import com.maze.student.users.models.Users;
@@ -33,7 +34,7 @@ import com.maze.student.users.repository.UserRepository;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/auth")
-public class AuthController {
+public class UserController implements SecuredRestController {
     AuthenticationManager authenticationManager;
     UserRepository userRepository;
     RolesRepository roleRepository;
@@ -62,7 +63,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<MessageResponse> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
@@ -117,4 +118,10 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+
+    @GetMapping("/students")
+    public ResponseEntity<?> getAllStudents() {
+    return (ResponseEntity<?>) userRepository.findAll();
+    }
+
 }
