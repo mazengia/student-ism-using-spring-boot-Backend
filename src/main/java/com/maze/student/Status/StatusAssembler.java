@@ -10,7 +10,8 @@ public class StatusAssembler implements RepresentationModelAssembler<Status, Sta
     public StatusDTO toModel(Status status) {
         return new StatusDTO(
                 status.getId(),
-                status.getName()
+                status.getName(),
+                status.getDescription()
         );
     }
 }

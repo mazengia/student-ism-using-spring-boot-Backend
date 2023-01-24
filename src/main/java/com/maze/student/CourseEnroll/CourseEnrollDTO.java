@@ -1,11 +1,11 @@
 package com.maze.student.CourseEnroll;
 
 import com.maze.student.Dpt.Dpt;
+import com.maze.student.course.Course;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
-import com.maze.student.course.Course;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

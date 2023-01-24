@@ -1,6 +1,9 @@
 package com.maze.student.department;
 
 
+import com.maze.student.course.Course;
+import com.maze.student.exception.EntityNotFoundException;
+import com.maze.student.util.Util;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -11,19 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-
-import java.util.Optional;
-
-import static com.maze.student.security.jwt.Util.getNullPropertyNames;
-
 @Service
 @AllArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService {
-
     DepartmentRepository departmentRepository;
     DepartmentAssembler departmentAssembler;
     PagedResourcesAssembler pagedResourcesAssembler;
-
     @Override
     public CollectionModel<DepartmentDTO> findAll(int page, int size ) {
         PageRequest pageRequest;
@@ -33,7 +29,6 @@ public class DepartmentServiceImpl implements DepartmentService {
             return pagedResourcesAssembler.toModel(departments, departmentAssembler);
         return null;
     }
-
     @Override
     public DepartmentDTO findDepartmentById(Long id) {
         Department department = departmentRepository.findById(id).orElse(null);
@@ -48,20 +43,13 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentRepository.deleteById(id);
         return null ;
     }
-
-
-
-
     @Override
-    public DepartmentDTO updateDepartment(Long departmentId, Department department) {
-
-        Optional<Department> departmentData = departmentRepository.findById(departmentId);
-        Department _data = departmentData.get();
-        String code = department.getCode();
-        String name = department.getName();
-        _data.setCode(code);
-        _data.setName(name);
-         departmentRepository.save(_data);
+    public DepartmentDTO updateDepartment(Long id, Department department) {
+        Department oldData = departmentRepository.findById(id).orElseThrow(()->new EntityNotFoundException(Course.class,"Id",String.valueOf(id)));
+        if (oldData != null) {
+            BeanUtils.copyProperties(department,oldData, Util.getNullPropertyNames(department));
+            return  addDepartment(oldData);
+        }
         return null;
     }
 

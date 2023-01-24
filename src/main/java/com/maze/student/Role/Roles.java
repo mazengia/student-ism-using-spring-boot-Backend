@@ -1,7 +1,7 @@
 package com.maze.student.Role;
 
- import com.maze.student.users.models.ERole;
- import lombok.AllArgsConstructor;
+import com.maze.student.users.ERole;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

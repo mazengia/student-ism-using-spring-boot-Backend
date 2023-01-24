@@ -1,7 +1,7 @@
 package com.maze.student.Score;
 
 import com.maze.student.security.SecuredRestController;
-import org.springframework.hateoas.*;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

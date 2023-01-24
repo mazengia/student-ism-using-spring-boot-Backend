@@ -1,8 +1,6 @@
 package com.maze.student.ProgramType;
 
 import com.maze.student.exception.ResourceNotFoundException;
-import com.maze.student.program.ProgramDTO;
-import com.maze.student.program.Programs;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -1,16 +1,15 @@
 package com.maze.student.security.services;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
-import com.maze.student.users.models.Users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.maze.student.users.SystemUsers;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;
@@ -35,16 +34,16 @@ public class UserDetailsImpl implements UserDetails {
     this.authorities = authorities;
   }
 
-  public static UserDetailsImpl build(Users users) {
-    List<GrantedAuthority> authorities = users.getRoles().stream()
+  public static UserDetailsImpl build(SystemUsers systemUsers) {
+    List<GrantedAuthority> authorities = systemUsers.getRoles().stream()
         .map(role -> new SimpleGrantedAuthority(role.getName().name()))
         .collect(Collectors.toList());
 
     return new UserDetailsImpl(
-        users.getId(),
-        users.getUsername(),
-        users.getEmail(),
-        users.getPassword(),
+        systemUsers.getId(),
+        systemUsers.getUsername(),
+        systemUsers.getEmail(),
+        systemUsers.getPassword(),
         authorities);
   }
 

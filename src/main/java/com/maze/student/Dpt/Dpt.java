@@ -1,10 +1,13 @@
 package com.maze.student.Dpt;
 
+import com.maze.student.CourseEnroll.CoursEnroll;
 import com.maze.student.ProgramType.ProgramType;
 import com.maze.student.department.Department;
 import com.maze.student.program.Programs;
-import com.maze.student.CourseEnroll.CoursEnroll;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 

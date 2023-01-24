@@ -1,6 +1,6 @@
 package com.maze.student.Role;
 
-import com.maze.student.users.models.ERole;
+import com.maze.student.users.ERole;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;

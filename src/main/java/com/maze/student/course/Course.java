@@ -1,7 +1,9 @@
 package com.maze.student.course;
-import com.maze.student.department.Department;
+
 import com.maze.student.CourseEnroll.CoursEnroll;
+import com.maze.student.department.Department;
 import lombok.*;
+
 import javax.persistence.*;
 
 @AllArgsConstructor

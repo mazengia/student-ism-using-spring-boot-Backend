@@ -1,6 +1,6 @@
 package com.maze.student.StudentEnroll;
 
-import com.maze.student.users.models.Users;
+import com.maze.student.users.SystemUsers;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,7 +10,7 @@ import org.springframework.hateoas.RepresentationModel;
 @Data
 @AllArgsConstructor
 public class StudentDTO extends RepresentationModel<StudentDTO> {
-    private Users student;
+    private SystemUsers student;
     private final Long id;
     int batch;
     String section;

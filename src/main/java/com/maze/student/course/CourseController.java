@@ -2,44 +2,56 @@ package com.maze.student.course;
 
 import com.maze.student.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.http.*;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/course")
-public class CourseController   implements SecuredRestController {
+public class CourseController   implements SecuredRestController , CourseAPI {
 
     CourseService courseService;
-
-    @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public CourseDTO addCourse(@RequestBody Course course) {
-         return courseService.addCourse(course);
-    }
 
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
     }
 
-    @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> findAll(
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            @RequestParam(required = false, defaultValue = "10") Integer size) {
-        CollectionModel<CourseDTO> courseDTOS = courseService.findAll(page, size);
-        if (courseDTOS != null) {
-            return ResponseEntity.ok(courseDTOS);
-        }
+
+    @Override
+    public CourseDTO updateCourse(long id, Course course) {
+        return courseService.updateCourse(id, course);
+    }
+
+    @Override
+    public ResponseEntity<CourseDTO> findCourseById(Long id) {
+        CourseDTO statusDTO = courseService.findCourseById(id);
+        if (statusDTO != null) return ResponseEntity.ok(statusDTO);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> findCourseId(@PathVariable Long id) {
-        CourseDTO courseDTO = courseService.findCourseById(id);
-        if (courseDTO != null) return ResponseEntity.ok(courseDTO);
+
+    @Override
+    public ResponseEntity<CourseDTO> deleteCourseById(Long id) {
+        CourseDTO statusDTO = courseService.deleteCourseById(id);
+        if (statusDTO != null) return ResponseEntity.ok(statusDTO);
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<CollectionModel<CourseDTO>> findAll(Integer page, Integer size) {
+        {
+            CollectionModel<CourseDTO> statusDTOS = courseService.findAll(page, size);
+            if (statusDTOS != null)
+                return ResponseEntity.ok(statusDTOS);
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+
+    @Override
+    public CourseDTO addCourse(Course course) {
+        return courseService.addCourse(course);
     }
 }

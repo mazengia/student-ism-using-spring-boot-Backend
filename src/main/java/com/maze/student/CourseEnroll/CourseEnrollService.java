@@ -8,4 +8,5 @@ public interface CourseEnrollService {
     CourseEnrollDTO enrollCourse(CoursEnroll coursEnroll);
 
     CourseEnrollDTO findCourseById(Long id);
+    CourseEnrollDTO updateCourseEnroll(Long id, CoursEnroll coursEnroll);
 }

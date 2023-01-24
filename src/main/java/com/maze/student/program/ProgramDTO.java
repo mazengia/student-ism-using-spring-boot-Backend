@@ -1,6 +1,8 @@
 package com.maze.student.program;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
 
 @EqualsAndHashCode(callSuper = true)

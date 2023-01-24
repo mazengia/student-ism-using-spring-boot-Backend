@@ -1,14 +1,16 @@
 package com.maze.student.Status;
 
-import com.maze.student.Role.Roles;
-import com.maze.student.exception.ResourceNotFoundException;
+import com.maze.student.exception.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+
+import static com.maze.student.util.Util.getNullPropertyNames;
 
 @Service
 @AllArgsConstructor
@@ -29,7 +31,6 @@ public class StatusServiceImpl implements StatusService {
         return null;
     }
 
-    @Override
     public StatusDTO addStatus(Status status) {
         return statusAssembler.toModel(statusRepository.save(status));
     }
@@ -44,12 +45,11 @@ public class StatusServiceImpl implements StatusService {
     }
 
     @Override
-    public StatusDTO deleteById(Long id) throws ResourceNotFoundException {
-        Status status = statusRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException(
-                        "Status with ID :" + id + " Not Found!")
-        );
-        statusRepository.deleteById(status.getId());
-        return statusAssembler.toModel(status);
-    }
+    public StatusDTO updateStatus(Long id, Status status) {
+        Status oldData = statusRepository.findById(id).orElseThrow(()->new EntityNotFoundException(Status.class,"Id",String.valueOf(id)));
+        if (oldData != null) {
+            BeanUtils.copyProperties(status,oldData,getNullPropertyNames(status));
+            return  addStatus(oldData);
+        }
+        return null;    }
 }

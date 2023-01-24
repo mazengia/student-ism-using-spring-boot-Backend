@@ -1,13 +1,13 @@
 package com.maze.student.Role;
 
- import lombok.AllArgsConstructor;
+import com.maze.student.exception.ResourceNotFoundException;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
- import com.maze.student.exception.ResourceNotFoundException;
 
 
 @Service

@@ -1,15 +1,14 @@
 package com.maze.student.security.jwt;
 
-import java.util.Date;
-
+import com.maze.student.security.services.UserDetailsImpl;
+import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import com.maze.student.security.services.UserDetailsImpl;
-import io.jsonwebtoken.*;
+import java.util.Date;
 
 @Component
 public class JwtUtils {
@@ -22,9 +21,7 @@ public class JwtUtils {
   private int jwtExpirationMs;
 
   public String generateJwtToken(Authentication authentication) {
-
     UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
-
     return Jwts.builder()
         .setSubject((userPrincipal.getUsername()))
         .setIssuedAt(new Date())

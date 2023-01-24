@@ -1,6 +1,6 @@
 package com.maze.student.Role;
 
-import com.maze.student.users.models.ERole;
+import com.maze.student.users.ERole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

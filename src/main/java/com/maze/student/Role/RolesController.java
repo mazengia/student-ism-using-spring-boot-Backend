@@ -60,4 +60,5 @@ public class RolesController  implements SecuredRestController {
 
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
+
 }

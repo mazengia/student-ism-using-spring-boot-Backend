@@ -8,4 +8,7 @@ public interface CourseService {
     CourseDTO addCourse(Course course);
 
     CourseDTO findCourseById(Long id);
+    CourseDTO updateCourse(Long id, Course course);
+
+    CourseDTO deleteCourseById(Long id);
 }

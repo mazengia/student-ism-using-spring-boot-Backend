@@ -2,7 +2,10 @@ package com.maze.student.CourseEnroll;
 
 import com.maze.student.Dpt.Dpt;
 import com.maze.student.course.Course;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 

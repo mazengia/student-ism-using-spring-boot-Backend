@@ -1,8 +1,8 @@
 package com.maze.student.StudentEnroll;
 
 
- import com.maze.student.users.models.Users;
- import lombok.AllArgsConstructor;
+import com.maze.student.users.SystemUsers;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -33,5 +33,5 @@ public class StudentEnrolment {
 
     @ManyToOne
     @JoinColumn(  name = "studentId" )
-    private Users student;
+    private SystemUsers student;
 }

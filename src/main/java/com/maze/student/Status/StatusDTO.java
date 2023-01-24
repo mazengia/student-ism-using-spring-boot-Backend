@@ -10,6 +10,7 @@ import org.springframework.hateoas.RepresentationModel;
 @AllArgsConstructor
 public class StatusDTO extends RepresentationModel<StatusDTO> {
     private final Long id;
-    private final String name;
+    private String name;
+    private String description;
 
 }
