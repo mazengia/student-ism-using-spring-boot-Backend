@@ -1,13 +1,14 @@
 package com.maze.student.Role;
 
-import com.maze.student.users.ERole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.NaturalId;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @AllArgsConstructor
 @Getter
@@ -18,9 +19,6 @@ public class Roles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Enumerated(EnumType.STRING)
-    @NaturalId
-    @Column(length = 60)
-    private ERole name;
+    private  String name;
 
 }

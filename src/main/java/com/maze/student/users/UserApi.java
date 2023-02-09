@@ -7,7 +7,6 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -18,13 +17,9 @@ import javax.validation.Valid;
 public interface UserApi {
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     UserDto createStudents(@RequestBody @Valid UserDto userDto) throws IllegalAccessException;
-//    @PostMapping("/sign-in")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    StudentDto signInStudents(@RequestBody @Valid StudentDto studentDto, JwtAuthenticationToken token) throws IllegalAccessException;
-
-    @GetMapping("/{id}")
+     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     UserDto getStudentsById(@PathVariable("id") long id);
 

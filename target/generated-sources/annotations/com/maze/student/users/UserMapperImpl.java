@@ -1,19 +1,22 @@
 package com.maze.student.users;
 
+import com.maze.student.Role.Roles;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import javax.annotation.processing.Generated;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-24T17:25:32+0300",
-    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 17.0.5 (Eclipse Adoptium)"
+    date = "2023-02-09T02:17:01+0300",
+    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19 (Oracle Corporation)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
 
     @Override
-    public SystemUsers toStudents(UserDto userDto) {
+    public SystemUsers toUsers(UserDto userDto) {
         if ( userDto == null ) {
             return null;
         }
@@ -32,30 +35,18 @@ public class UserMapperImpl implements UserMapper {
         systemUsers.setUsername( userDto.getUsername() );
         systemUsers.setEmail( userDto.getEmail() );
         systemUsers.setPassword( userDto.getPassword() );
+        Set<Roles> set = userDto.getRole();
+        if ( set != null ) {
+            systemUsers.setRole( new LinkedHashSet<Roles>( set ) );
+        }
         systemUsers.setDpt( userDto.getDpt() );
 
         return systemUsers;
     }
 
     @Override
-    public SignupRequest toCreateStudents(UserDto userDto) {
-        if ( userDto == null ) {
-            return null;
-        }
-
-        SignupRequest signupRequest = new SignupRequest();
-
-        signupRequest.setUsername( userDto.getUsername() );
-        signupRequest.setDpt( userDto.getDpt() );
-        signupRequest.setEmail( userDto.getEmail() );
-        signupRequest.setPassword( userDto.getPassword() );
-
-        return signupRequest;
-    }
-
-    @Override
-    public UserDto toStudentsDto(ResponseEntity<MessageResponse> students) {
-        if ( students == null ) {
+    public UserDto toUsersDto(ResponseEntity<MessageResponse> users) {
+        if ( users == null ) {
             return null;
         }
 
@@ -65,7 +56,7 @@ public class UserMapperImpl implements UserMapper {
     }
 
     @Override
-    public UserDto toGetStudentsDto(SystemUsers systemUsers) {
+    public UserDto toGetUsersDto(SystemUsers systemUsers) {
         if ( systemUsers == null ) {
             return null;
         }
@@ -85,6 +76,10 @@ public class UserMapperImpl implements UserMapper {
         userDto.setEmail( systemUsers.getEmail() );
         userDto.setPassword( systemUsers.getPassword() );
         userDto.setDpt( systemUsers.getDpt() );
+        Set<Roles> set = systemUsers.getRole();
+        if ( set != null ) {
+            userDto.setRole( new LinkedHashSet<Roles>( set ) );
+        }
 
         return userDto;
     }

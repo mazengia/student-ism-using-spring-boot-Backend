@@ -1,7 +1,7 @@
 package com.maze.student.Dpt;
 
+import com.maze.student.Department.Department;
 import com.maze.student.ProgramType.ProgramType;
-import com.maze.student.department.Department;
 import com.maze.student.program.Programs;
 import lombok.AllArgsConstructor;
 import lombok.Data;

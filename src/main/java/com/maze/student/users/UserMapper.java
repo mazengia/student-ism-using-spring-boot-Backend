@@ -5,8 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    SystemUsers toStudents(UserDto userDto);
-    SignupRequest toCreateStudents(UserDto userDto);
-    UserDto toStudentsDto(ResponseEntity<MessageResponse> students);
-    UserDto toGetStudentsDto(SystemUsers systemUsers);
+    SystemUsers toUsers(UserDto userDto);
+    UserDto toUsersDto(ResponseEntity<MessageResponse> users);
+    UserDto toGetUsersDto(SystemUsers systemUsers);
 }

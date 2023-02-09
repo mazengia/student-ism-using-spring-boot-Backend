@@ -1,7 +1,7 @@
 package com.maze.student.course;
 
-import com.maze.student.CourseEnroll.CoursEnroll;
-import com.maze.student.department.Department;
+import com.maze.student.CourseEnroll.CourseEnroll;
+import com.maze.student.Department.Department;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,5 +28,5 @@ public class Course {
     private Department department;
 
     @OneToOne(mappedBy = "course")
-    private CoursEnroll courseEnroll;
+    private CourseEnroll courseEnroll;
 }

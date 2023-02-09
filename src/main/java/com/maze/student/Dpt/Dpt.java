@@ -1,8 +1,8 @@
 package com.maze.student.Dpt;
 
-import com.maze.student.CourseEnroll.CoursEnroll;
+import com.maze.student.CourseEnroll.CourseEnroll;
+import com.maze.student.Department.Department;
 import com.maze.student.ProgramType.ProgramType;
-import com.maze.student.department.Department;
 import com.maze.student.program.Programs;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,5 +37,5 @@ public class Dpt {
 
 
     @OneToOne(mappedBy = "dpt")
-    private CoursEnroll courseEnroll;
+    private CourseEnroll courseEnroll;
 }

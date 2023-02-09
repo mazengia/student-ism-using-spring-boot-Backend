@@ -20,7 +20,7 @@ public class ResultServiceImpl implements ResultService {
     public CollectionModel<ResultDTO> findAll(int page, int size) {
         PageRequest pageRequest;
         pageRequest = PageRequest.of(page, size);
-        Page<ScoreRecord> scoreRecords = resultRepository.findAll(pageRequest);
+        Page<Results> scoreRecords = resultRepository.findAll(pageRequest);
         if (!CollectionUtils.isEmpty(scoreRecords.getContent()))
             return pagedResourcesAssembler.toModel(scoreRecords, resultAssembler);
 
@@ -28,15 +28,15 @@ public class ResultServiceImpl implements ResultService {
     }
 
     @Override
-    public ResultDTO addScore(ScoreRecord scoreRecord) {
-        return resultAssembler.toModel(resultRepository.save(scoreRecord));
+    public ResultDTO addScore(Results results) {
+        return resultAssembler.toModel(resultRepository.save(results));
     }
 
     @Override
     public ResultDTO findScoreById(Long id) {
-        ScoreRecord scoreRecord = resultRepository.findById(id).orElse(null);
-        if (scoreRecord != null) {
-            return resultAssembler.toModel(scoreRecord);
+        Results results = resultRepository.findById(id).orElse(null);
+        if (results != null) {
+            return resultAssembler.toModel(results);
         }
         return null;
     }

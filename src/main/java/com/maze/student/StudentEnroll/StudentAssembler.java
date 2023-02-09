@@ -9,18 +9,11 @@ public class StudentAssembler implements RepresentationModelAssembler<StudentEnr
     @Override
     public StudentDTO toModel(StudentEnrolment studentEnrolment) {
         return new StudentDTO(
-                studentEnrolment.getStudent(),
-                studentEnrolment.getId(),
-                studentEnrolment.getBatch(),
-                studentEnrolment.getSection(),
-                studentEnrolment.getFirstSemester(),
-                studentEnrolment.getSecondSemester(),
-                studentEnrolment.getThirdSemester(),
-                studentEnrolment.getCGPA(),
-                studentEnrolment.getPGPA(),
-                studentEnrolment.getThirdSemesterPoint(),
-                studentEnrolment.getSecondSemesterPoint(),
-                studentEnrolment.getThirdSemesterPoint()
-        );
+                        studentEnrolment.getStudent(),
+                        studentEnrolment.getId(),
+                        studentEnrolment.getBatches(),
+                        studentEnrolment.getSemesters(),
+                        studentEnrolment.getSections()
+                );
     }
 }

@@ -1,6 +1,6 @@
 package com.maze.student.program;
 
-import com.maze.student.security.SecuredRestController;
+import com.maze.student._config.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/programs")
+@RequestMapping("/api/v1/programs")
 public class ProgramController   implements SecuredRestController {
 
     ProgramService programService;

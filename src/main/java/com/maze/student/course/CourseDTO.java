@@ -1,6 +1,6 @@
 package com.maze.student.course;
 
-import com.maze.student.department.Department;
+import com.maze.student.Department.Department;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CourseEnrollRepository extends JpaRepository<CoursEnroll, Long> {
+public interface CourseEnrollRepository extends JpaRepository<CourseEnroll, Long> {
     @Override
-    Optional<CoursEnroll> findById(Long aLong);
+    Optional<CourseEnroll> findById(Long aLong);
 }

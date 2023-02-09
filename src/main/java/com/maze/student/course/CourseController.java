@@ -1,6 +1,6 @@
 package com.maze.student.course;
 
-import com.maze.student.security.SecuredRestController;
+import com.maze.student._config.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/course")
+@RequestMapping("/api/v1/course")
 public class CourseController   implements SecuredRestController , CourseAPI {
 
     CourseService courseService;

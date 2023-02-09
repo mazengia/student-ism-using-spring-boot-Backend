@@ -1,6 +1,6 @@
 package com.maze.student.CourseEnroll;
 
-import com.maze.student.security.SecuredRestController;
+import com.maze.student._config.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/course-enrol")
+@RequestMapping("/api/v1/course-enrol")
 public class CourseEnrollController   implements SecuredRestController,CourseEnrollAPI {
 
     CourseEnrollService courseEnrollService;
@@ -20,8 +20,8 @@ public class CourseEnrollController   implements SecuredRestController,CourseEnr
     }
 
     @Override
-    public CourseEnrollDTO updateCourseEnroll(long id, CoursEnroll coursEnroll) {
-        return courseEnrollService.updateCourseEnroll(id, coursEnroll);
+    public CourseEnrollDTO updateCourseEnroll(long id, CourseEnroll courseEnroll) {
+        return courseEnrollService.updateCourseEnroll(id, courseEnroll);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class CourseEnrollController   implements SecuredRestController,CourseEnr
         return ResponseEntity.noContent().build();
     }
     @Override
-    public CourseEnrollDTO addCourseEnroll(CoursEnroll coursEnroll) {
-        return courseEnrollService.enrollCourse(coursEnroll);
+    public CourseEnrollDTO addCourseEnroll(CourseEnroll courseEnroll) {
+        return courseEnrollService.enrollCourse(courseEnroll);
     }
 }

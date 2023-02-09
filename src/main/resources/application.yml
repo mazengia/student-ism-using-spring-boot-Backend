@@ -1,0 +1,22 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    password: P@ss2345
+    username: mtesfa
+    url: jdbc:sqlserver://localhost:1433;encrypt=false;database=student
+  #    url: jdbc:mysql://localhost:3306/jwt
+  #    username: root
+  #    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+# App Properties
+jwttoken:
+  app:
+    jwtSecret: secrete
+    jwtExpirationMs: 86400000

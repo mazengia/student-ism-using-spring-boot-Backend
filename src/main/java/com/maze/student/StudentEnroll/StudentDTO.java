@@ -1,5 +1,8 @@
 package com.maze.student.StudentEnroll;
 
+import com.maze.student.Batch.Batches;
+import com.maze.student.Sections.Sections;
+import com.maze.student.Semisters.Semesters;
 import com.maze.student.users.SystemUsers;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,15 +15,8 @@ import org.springframework.hateoas.RepresentationModel;
 public class StudentDTO extends RepresentationModel<StudentDTO> {
     private SystemUsers student;
     private final Long id;
-    int batch;
-    String section;
-    String firstSemester;
-    String secondSemester;
-    String thirdSemester;
-    float firstSemesterPoint;
-    float secondSemesterPoint;
-    float thirdSemesterPoint;
-    float PGPA;//Previous GPA
-    float CGPA;//Current GPA
+    private Batches batches;
+    private Semesters semesters;
+    private Sections sections;
 
 }

@@ -1,6 +1,6 @@
 package com.maze.student.Status;
 
-import com.maze.student.util.Auditable;
+import com.maze.student._config.util.Auditable;
 import lombok.Getter;
 import lombok.Setter;
 

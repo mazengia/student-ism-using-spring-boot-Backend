@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface StatusRepository extends JpaRepository<Status, Long> {
     @Override
     Optional<Status> findById(Long aLong);
+    Boolean existsByName(String name);
 }

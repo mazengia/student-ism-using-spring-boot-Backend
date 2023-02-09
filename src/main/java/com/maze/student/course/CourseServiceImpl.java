@@ -1,6 +1,6 @@
 package com.maze.student.course;
 
-import com.maze.student.exception.EntityNotFoundException;
+import com.maze.student._config.exception.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -10,7 +10,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import static com.maze.student.util.Util.getNullPropertyNames;
+import static com.maze.student._config.util.Util.getNullPropertyNames;
 
 @Service
 @AllArgsConstructor

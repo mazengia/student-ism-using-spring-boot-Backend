@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ResultRepository extends JpaRepository<ScoreRecord, Long> {
+public interface ResultRepository extends JpaRepository<Results, Long> {
     @Override
-    Optional<ScoreRecord> findById(Long aLong);
+    Optional<Results> findById(Long aLong);
 }

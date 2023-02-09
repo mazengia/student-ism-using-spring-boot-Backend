@@ -1,6 +1,8 @@
 package com.maze.student.CourseEnroll;
 
+import com.maze.student.Batch.Batches;
 import com.maze.student.Dpt.Dpt;
+import com.maze.student.Semisters.Semesters;
 import com.maze.student.course.Course;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,8 +14,8 @@ import org.springframework.hateoas.RepresentationModel;
 @AllArgsConstructor
 public class CourseEnrollDTO extends RepresentationModel<CourseEnrollDTO> {
     private final Long id;
-    private final int batch;
-    private final String semester;
+    private Batches batches;
+    private Semesters semesters;
     private final Course course;
     private final Dpt dpt;
 

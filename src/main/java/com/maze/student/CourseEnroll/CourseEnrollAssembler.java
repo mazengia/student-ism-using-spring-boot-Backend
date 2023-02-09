@@ -4,16 +4,16 @@ import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CourseEnrollAssembler implements RepresentationModelAssembler<CoursEnroll, CourseEnrollDTO> {
+public class CourseEnrollAssembler implements RepresentationModelAssembler<CourseEnroll, CourseEnrollDTO> {
 
     @Override
-    public CourseEnrollDTO toModel(CoursEnroll coursEnroll) {
+    public CourseEnrollDTO toModel(CourseEnroll courseEnroll) {
         return new CourseEnrollDTO(
-                coursEnroll.getId(),
-                coursEnroll.getBatch(),
-                coursEnroll.getSemester(),
-                coursEnroll.getCourse(),
-                coursEnroll.getDpt()
+                courseEnroll.getId(),
+                courseEnroll.getBatches(),
+                courseEnroll.getSemesters(),
+                courseEnroll.getCourse(),
+                courseEnroll.getDpt()
         );
     }
 }

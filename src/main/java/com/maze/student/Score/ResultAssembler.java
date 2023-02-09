@@ -4,18 +4,19 @@ import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ResultAssembler implements RepresentationModelAssembler<ScoreRecord, ResultDTO> {
+public class ResultAssembler implements RepresentationModelAssembler<Results, ResultDTO> {
 
     @Override
-    public ResultDTO toModel(ScoreRecord scoreRecord) {
+    public ResultDTO toModel(Results results) {
         return new ResultDTO(
-                scoreRecord.getId(),
-                scoreRecord.getStudentId(),
-                scoreRecord.getSubjectId(),
-                scoreRecord.getFirstSemester(),
-                scoreRecord.getSecondSemester(),
-                scoreRecord.getThirdSemester(),
-                scoreRecord.getYear()
+                results.getId(),
+                results.getStudentEnrolment(),
+                results.getCourseEnroll(),
+                results.getMid(),
+                results.getQuiz(),
+                results.getFinal_result(),
+                results.getTotal(),
+                results.getAssignment()
         );
     }
 }

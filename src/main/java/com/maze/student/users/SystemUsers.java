@@ -2,14 +2,13 @@ package com.maze.student.users;
 
 import com.maze.student.Dpt.Dpt;
 import com.maze.student.Role.Roles;
-import com.maze.student.util.Auditable;
+import com.maze.student._config.util.Auditable;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -43,7 +42,7 @@ public class SystemUsers extends Auditable {
   @JoinTable(  name = "user_roles", 
         joinColumns = @JoinColumn(name = "user_id"), 
         inverseJoinColumns = @JoinColumn(name = "role_id"))
-  private Set<Roles> roles = new HashSet<>();
+  private Set<Roles> role;
 
   @ManyToOne
   @JoinColumn(name = "dptId")

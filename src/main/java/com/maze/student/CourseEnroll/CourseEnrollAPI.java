@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 public interface CourseEnrollAPI {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    CourseEnrollDTO updateCourseEnroll(@PathVariable long id, @RequestBody CoursEnroll coursEnroll);
+    CourseEnrollDTO updateCourseEnroll(@PathVariable long id, @RequestBody CourseEnroll courseEnroll);
 
     @GetMapping("/{id}")
     ResponseEntity<CourseEnrollDTO> findCourseEnrollById(@PathVariable Long id);
@@ -18,6 +18,6 @@ public interface CourseEnrollAPI {
             @RequestParam(required = false, defaultValue = "0") Integer page,
             @RequestParam(required = false, defaultValue = "10") Integer size);
     @PostMapping
-    CourseEnrollDTO addCourseEnroll(@RequestBody CoursEnroll coursEnroll);
+    CourseEnrollDTO addCourseEnroll(@RequestBody CourseEnroll courseEnroll);
 
 }

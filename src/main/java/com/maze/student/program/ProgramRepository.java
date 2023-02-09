@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface ProgramRepository extends JpaRepository<Programs, Long> {
     @Override
     Optional<Programs> findById(Long aLong);
+    Boolean existsByName(String name);
 }

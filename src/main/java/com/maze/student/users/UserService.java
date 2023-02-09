@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-    ResponseEntity<MessageResponse> createStudents(SignupRequest students ) throws IllegalAccessException;
-//    ResponseEntity<JwtResponse> signInStudents(Students students, JwtAuthenticationToken token) throws IllegalAccessException;
+    ResponseEntity<MessageResponse> createStudents(SystemUsers students ) throws IllegalAccessException;
 
      SystemUsers getStudentsById(long id);
 

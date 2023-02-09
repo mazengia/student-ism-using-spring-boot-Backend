@@ -1,8 +1,8 @@
 package com.maze.student.users;
 
-import com.maze.student.security.jwt.JwtUtils;
-import com.maze.student.security.services.UserDetailsImpl;
-import com.maze.student.util.PaginatedResultsRetrievedEvent;
+import com.maze.student._config.security.jwt.JwtUtils;
+import com.maze.student._config.security.services.UserDetailsImpl;
+import com.maze.student._config.util.PaginatedResultsRetrievedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Pageable;
@@ -39,16 +39,12 @@ public class UsersController implements UserApi {
     private final JwtUtils jwtUtils;
     @Override
     public UserDto createStudents(UserDto userDto) throws IllegalAccessException {
-        return userMapper.toStudentsDto(userService.createStudents(userMapper.toCreateStudents(userDto)));
+        return userMapper.toUsersDto(userService.createStudents(userMapper.toUsers(userDto)));
     }
 
-//    @Override
-//    public StudentDto signInStudents( StudentDto studentDto, JwtAuthenticationToken token) throws IllegalAccessException {
-//        return studentMapper.toStudentsDto(userService.createStudents(studentMapper.toStudents(studentDto), token));
-//
-//    }
+
 @PostMapping("/sign-in")
-public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
     Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -70,11 +66,11 @@ public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest login
 
     @Override
     public UserDto getStudentsById(long id) {
-        return userMapper.toGetStudentsDto(userService.getStudentsById(id));
+        return userMapper.toGetUsersDto(userService.getStudentsById(id));
     }
     @Override
     public UserDto updateStudents(long id, UserDto userDto, JwtAuthenticationToken token) throws IllegalAccessException {
-        return userMapper.toGetStudentsDto(userService.updateStudents(id, userMapper.toStudents(userDto), token));
+        return userMapper.toGetUsersDto(userService.updateStudents(id, userMapper.toUsers(userDto), token));
     }
 
 
@@ -82,6 +78,6 @@ public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest login
     public ResponseEntity<PagedModel<UserDto>> getAllStudents(Pageable pageable, PagedResourcesAssembler assembler, JwtAuthenticationToken token, UriComponentsBuilder uriBuilder, HttpServletResponse response) {
         eventPublisher.publishEvent(new PaginatedResultsRetrievedEvent<>(
                 UserDto.class, uriBuilder, response, pageable.getPageNumber(), userService.getAllStudents(pageable, token).getTotalPages(), pageable.getPageSize()));
-        return new ResponseEntity<PagedModel<UserDto>>(assembler.toModel(userService.getAllStudents(pageable, token).map(userMapper::toGetStudentsDto)), HttpStatus.OK);
+        return new ResponseEntity<PagedModel<UserDto>>(assembler.toModel(userService.getAllStudents(pageable, token).map(userMapper::toGetUsersDto)), HttpStatus.OK);
     }
 }

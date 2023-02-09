@@ -1,6 +1,6 @@
 package com.maze.student.Score;
 
-import com.maze.student.security.SecuredRestController;
+import com.maze.student._config.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/result")
+@RequestMapping("/api/v1/result")
 public class ResultController   implements SecuredRestController {
 
     ResultService resultService;
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResultDTO addScore(@RequestBody ScoreRecord scoreRecord) {
+    public ResultDTO addScore(@RequestBody Results results) {
 
-        return resultService.addScore(scoreRecord);
+        return resultService.addScore(results);
     }
 
     public ResultController(ResultService resultService) {

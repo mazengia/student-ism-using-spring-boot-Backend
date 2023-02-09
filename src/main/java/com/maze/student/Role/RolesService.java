@@ -1,6 +1,6 @@
 package com.maze.student.Role;
 
-import com.maze.student.exception.ResourceNotFoundException;
+import com.maze.student._config.exception.ResourceNotFoundException;
 import org.springframework.hateoas.CollectionModel;
 
 public interface RolesService {
