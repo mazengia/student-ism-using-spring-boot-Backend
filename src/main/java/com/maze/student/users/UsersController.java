@@ -34,7 +34,6 @@ public class UsersController implements UserApi {
     private final UserService userService;
     private final UserMapper userMapper;
     private final ApplicationEventPublisher eventPublisher;
-
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
     @Override

@@ -11,8 +11,8 @@ public class DptAssembler implements RepresentationModelAssembler<Dpt, DptDTO> {
         return new DptDTO(
                 dpt.getId(),
                 dpt.getDepartment(),
-                dpt.getProgramType(),
-                dpt.getPrograms()
+                dpt.getPrograms(),
+                dpt.getCertifications()
         );
     }
 }

@@ -6,10 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
-@Getter
-@Setter
-@RequiredArgsConstructor
+@Data
 @Entity
 @EqualsAndHashCode(exclude = {"department"})
 public class Course {

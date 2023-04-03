@@ -1,6 +1,6 @@
 package com.maze.student.CourseEnroll;
 
-import com.maze.student.Batch.Batches;
+import com.maze.student.CerteficationYear.CertificationYear;
 import com.maze.student.Dpt.Dpt;
 import com.maze.student.Semisters.Semesters;
 import com.maze.student.course.Course;
@@ -14,7 +14,7 @@ import org.springframework.hateoas.RepresentationModel;
 @AllArgsConstructor
 public class CourseEnrollDTO extends RepresentationModel<CourseEnrollDTO> {
     private final Long id;
-    private Batches batches;
+    private CertificationYear certificationYear;
     private Semesters semesters;
     private final Course course;
     private final Dpt dpt;

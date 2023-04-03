@@ -2,21 +2,15 @@ package com.maze.student.StudentEnroll;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.maze.student.Batch.Batches;
+import com.maze.student.CerteficationYear.CertificationYear;
 import com.maze.student.Sections.Sections;
 import com.maze.student.Semisters.Semesters;
 import com.maze.student.users.SystemUsers;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
-@Getter
-@Setter
-@RequiredArgsConstructor
+@Data
 @Entity
 @Table(uniqueConstraints={ @UniqueConstraint(columnNames = {"batchesId","semestersId","sectionsId","studentId" })})
 
@@ -27,7 +21,7 @@ public class StudentEnrolment {
     @ManyToOne
     @JoinColumn(  name = "batchesId" )
     @JsonIgnoreProperties(value = {"StudentEnrolment"})
-    private Batches batches;
+    private CertificationYear certificationYear;
 
     @ManyToOne
     @JoinColumn(  name = "semestersId" )

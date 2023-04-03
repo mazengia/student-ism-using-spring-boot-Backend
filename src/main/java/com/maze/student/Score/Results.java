@@ -3,17 +3,11 @@ package com.maze.student.Score;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.maze.student.CourseEnroll.CourseEnroll;
 import com.maze.student.StudentEnroll.StudentEnrolment;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
-@Getter
-@Setter
-@RequiredArgsConstructor
+@Data
 @Entity
 public class Results {
     @Id

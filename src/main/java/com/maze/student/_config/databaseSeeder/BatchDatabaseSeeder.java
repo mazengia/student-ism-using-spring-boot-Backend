@@ -1,8 +1,8 @@
 package com.maze.student._config.databaseSeeder;
 
-import com.maze.student.Batch.Batches;
-import com.maze.student.Batch.BatchesRepository;
-import com.maze.student.Batch.BatchesServiceImpl;
+import com.maze.student.CerteficationYear.CertificationYear;
+import com.maze.student.CerteficationYear.CertificationYearRepository;
+import com.maze.student.CerteficationYear.CertificationYearServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
@@ -13,42 +13,42 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Log4j2
 public class BatchDatabaseSeeder implements CommandLineRunner {
-    private final BatchesRepository batchesRepository;
-    private final BatchesServiceImpl batchesService;
+    private final CertificationYearRepository certificationYearRepository;
+    private final CertificationYearServiceImpl batchesService;
 
     @SneakyThrows
     @Override
     public void run(String... args) {
 
-        if (batchesRepository.existsByName("First Year").equals(false)) {
+        if (certificationYearRepository.existsByName("First Year").equals(false)) {
 
-            Batches batches = new Batches();
-            batches.setName("First Year");
-            batchesService.createBatches(batches);
+            CertificationYear certificationYear = new CertificationYear();
+            certificationYear.setName("First Year");
+            batchesService.createBatches(certificationYear);
         }
-        if (batchesRepository.existsByName("Second Year").equals(false)) {
+        if (certificationYearRepository.existsByName("Second Year").equals(false)) {
 
-            Batches batches = new Batches();
-            batches.setName("Second Year");
-            batchesService.createBatches(batches);
+            CertificationYear certificationYear = new CertificationYear();
+            certificationYear.setName("Second Year");
+            batchesService.createBatches(certificationYear);
         }
-        if (batchesRepository.existsByName("Third Year").equals(false)) {
+        if (certificationYearRepository.existsByName("Third Year").equals(false)) {
 
-            Batches batches = new Batches();
-            batches.setName("Third Year");
-            batchesService.createBatches(batches);
+            CertificationYear certificationYear = new CertificationYear();
+            certificationYear.setName("Third Year");
+            batchesService.createBatches(certificationYear);
         }
-        if (batchesRepository.existsByName("Forth Year").equals(false)) {
+        if (certificationYearRepository.existsByName("Forth Year").equals(false)) {
 
-            Batches batches = new Batches();
-            batches.setName("Forth Year");
-            batchesService.createBatches(batches);
+            CertificationYear certificationYear = new CertificationYear();
+            certificationYear.setName("Forth Year");
+            batchesService.createBatches(certificationYear);
         }
-        if (batchesRepository.existsByName("Fifth Year").equals(false)) {
+        if (certificationYearRepository.existsByName("Fifth Year").equals(false)) {
 
-            Batches batches = new Batches();
-            batches.setName("Fifth Year");
-            batchesService.createBatches(batches);
+            CertificationYear certificationYear = new CertificationYear();
+            certificationYear.setName("Fifth Year");
+            batchesService.createBatches(certificationYear);
         }
     }
 }

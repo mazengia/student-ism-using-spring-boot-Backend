@@ -1,19 +1,13 @@
 package com.maze.student.Department;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Table(name = "Department", indexes = {
         @Index(name = "idx_department_id", columnList = "id")
 })
-@AllArgsConstructor
-@Getter
-@Setter
-@RequiredArgsConstructor
+@Data
 @Entity
 public class Department {
     @Id

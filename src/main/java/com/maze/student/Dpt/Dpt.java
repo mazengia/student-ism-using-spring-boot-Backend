@@ -2,19 +2,13 @@ package com.maze.student.Dpt;
 
 import com.maze.student.CourseEnroll.CourseEnroll;
 import com.maze.student.Department.Department;
-import com.maze.student.ProgramType.ProgramType;
-import com.maze.student.program.Programs;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import com.maze.student.Program.Programs;
+import com.maze.student.CertificationType.Certifications;
+import lombok.*;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
-@Getter
-@Setter
-@RequiredArgsConstructor
+@Data
 @Entity
 @Table(uniqueConstraints={ @UniqueConstraint(columnNames = {"departmentId", "typesId","programsId"})})
 
@@ -29,11 +23,11 @@ public class Dpt {
 
     @ManyToOne
     @JoinColumn(  name = "typesId" )
-    private ProgramType programType;
+    private Programs programs;
 
     @ManyToOne
     @JoinColumn(  name = "programsId" )
-    private Programs programs;
+    private Certifications certifications;
 
 
     @OneToOne(mappedBy = "dpt")

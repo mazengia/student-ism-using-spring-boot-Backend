@@ -10,7 +10,7 @@ public class CourseEnrollAssembler implements RepresentationModelAssembler<Cours
     public CourseEnrollDTO toModel(CourseEnroll courseEnroll) {
         return new CourseEnrollDTO(
                 courseEnroll.getId(),
-                courseEnroll.getBatches(),
+                courseEnroll.getCertificationYear(),
                 courseEnroll.getSemesters(),
                 courseEnroll.getCourse(),
                 courseEnroll.getDpt()

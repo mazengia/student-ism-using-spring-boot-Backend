@@ -11,7 +11,7 @@ public class StudentAssembler implements RepresentationModelAssembler<StudentEnr
         return new StudentDTO(
                         studentEnrolment.getStudent(),
                         studentEnrolment.getId(),
-                        studentEnrolment.getBatches(),
+                        studentEnrolment.getCertificationYear(),
                         studentEnrolment.getSemesters(),
                         studentEnrolment.getSections()
                 );
