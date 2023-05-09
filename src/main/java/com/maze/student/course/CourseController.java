@@ -1,8 +1,10 @@
 package com.maze.student.course;
 
 import com.maze.student._config.security.SecuredRestController;
+import com.maze.student._config.security.jwt.JwtUtils;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,9 +42,9 @@ public class CourseController   implements SecuredRestController , CourseAPI {
     }
 
     @Override
-    public ResponseEntity<CollectionModel<CourseDTO>> findAll(Integer page, Integer size) {
+    public ResponseEntity<CollectionModel<CourseDTO>> findAll(Integer page, Integer size, Authentication authentication) {
         {
-            CollectionModel<CourseDTO> statusDTOS = courseService.findAll(page, size);
+            CollectionModel<CourseDTO> statusDTOS = courseService.findAll(page, size,authentication);
             if (statusDTOS != null)
                 return ResponseEntity.ok(statusDTOS);
             return ResponseEntity.noContent().build();

@@ -12,7 +12,7 @@ public interface SectionsService {
     Sections createSections(Sections sections) throws IllegalAccessException;
     Sections getSectionsById(long id);
 
-    Page<Sections> getAllSections(Pageable pageable, JwtAuthenticationToken token);
+    Page<Sections> getAllSections(Pageable pageable );
     Sections updateSections(long id, Sections sections, JwtAuthenticationToken token) throws IllegalAccessException;
     void deleteSections(long id, JwtAuthenticationToken token);
 

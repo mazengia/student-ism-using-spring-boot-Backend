@@ -14,10 +14,11 @@ public interface UserService {
 
      SystemUsers getStudentsById(long id);
 
-    Page<SystemUsers> getAllStudents(Pageable pageable, JwtAuthenticationToken token);
+    Page<SystemUsers> getAllStudents(Pageable pageable);
      SystemUsers updateStudents(long id, SystemUsers systemUsers, JwtAuthenticationToken token) throws IllegalAccessException;
     void deleteStudents(long id, JwtAuthenticationToken token);
 
+    Page<SystemUsers> getStudentsGroupedByDptId(long id,Pageable pageable);
 }
 
 

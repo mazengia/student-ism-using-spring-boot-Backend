@@ -12,7 +12,7 @@ public interface CertificationYearService {
     CertificationYear createBatches(CertificationYear certificationYear) throws IllegalAccessException;
     CertificationYear getBatchesById(long id);
 
-    Page<CertificationYear> getAllBatches(Pageable pageable, JwtAuthenticationToken token);
+    Page<CertificationYear> getAllBatches(Pageable pageable );
     CertificationYear updateBatches(long id, CertificationYear certificationYear, JwtAuthenticationToken token) throws IllegalAccessException;
     void deleteBatches(long id, JwtAuthenticationToken token);
 

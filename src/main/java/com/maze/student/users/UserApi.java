@@ -22,7 +22,14 @@ public interface UserApi {
      @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     UserDto getStudentsById(@PathVariable("id") long id);
-
+    @GetMapping("/groupedByDpt/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    ResponseEntity<PagedModel<UserDto>> getStudentsByDptId(@Parameter(description = "pagination object", schema = @Schema(implementation = Pageable.class))
+                                                       @PathVariable("id") long id,
+                                                       @Valid Pageable pageable,
+                                                       PagedResourcesAssembler assembler,
+                                                       UriComponentsBuilder uriBuilder,
+                                                       final HttpServletResponse response);
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     UserDto updateStudents(@PathVariable("id") long expenseId, @RequestBody @Valid UserDto userDto, JwtAuthenticationToken token) throws IllegalAccessException;
@@ -32,7 +39,6 @@ public interface UserApi {
     ResponseEntity<PagedModel<UserDto>> getAllStudents(@Parameter(description = "pagination object", schema = @Schema(implementation = Pageable.class))
                                                        @Valid Pageable pageable,
                                                        PagedResourcesAssembler assembler,
-                                                       JwtAuthenticationToken token,
                                                        UriComponentsBuilder uriBuilder,
                                                        final HttpServletResponse response);
 }

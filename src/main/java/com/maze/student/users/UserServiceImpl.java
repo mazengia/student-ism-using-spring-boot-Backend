@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Page<SystemUsers> getAllStudents(Pageable pageable, JwtAuthenticationToken token) {
+    public Page<SystemUsers> getAllStudents(Pageable pageable ) {
         return userRepository.findAllByOrderByCreatedAtDesc(pageable);
     }
 
@@ -91,6 +91,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteStudents(long id, JwtAuthenticationToken token) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<SystemUsers> getStudentsGroupedByDptId(long id, Pageable pageable) {
+        return userRepository.findAllByDptIdOrderByCreatedAtDesc(id,pageable);
     }
 
 

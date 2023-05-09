@@ -41,9 +41,9 @@ public class CertificationYearController implements CertificationYearApi {
     }
 
     @Override
-    public ResponseEntity<PagedModel<CertificationYearDto>> getAllBatches(Pageable pageable, PagedResourcesAssembler assembler, JwtAuthenticationToken token, UriComponentsBuilder uriBuilder, HttpServletResponse response) {
+    public ResponseEntity<PagedModel<CertificationYearDto>> getAllBatches(Pageable pageable, PagedResourcesAssembler assembler,  UriComponentsBuilder uriBuilder, HttpServletResponse response) {
         eventPublisher.publishEvent(new PaginatedResultsRetrievedEvent<>(
-                CertificationYearDto.class, uriBuilder, response, pageable.getPageNumber(), certificationYearService.getAllBatches(pageable, token).getTotalPages(), pageable.getPageSize()));
-        return new ResponseEntity<PagedModel<CertificationYearDto>>(assembler.toModel(certificationYearService.getAllBatches(pageable, token).map(certificationYearMapper::toAppealDto)), HttpStatus.OK);
+                CertificationYearDto.class, uriBuilder, response, pageable.getPageNumber(), certificationYearService.getAllBatches(pageable).getTotalPages(), pageable.getPageSize()));
+        return new ResponseEntity<PagedModel<CertificationYearDto>>(assembler.toModel(certificationYearService.getAllBatches(pageable).map(certificationYearMapper::toAppealDto)), HttpStatus.OK);
     }
 }

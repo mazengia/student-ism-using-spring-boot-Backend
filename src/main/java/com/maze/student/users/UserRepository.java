@@ -14,6 +14,7 @@ import java.util.Optional;
 @RepositoryRestResource
 public interface UserRepository extends PagingAndSortingRepository<SystemUsers, Long>, JpaSpecificationExecutor<Semesters> {
     Page<SystemUsers> findAllByOrderByCreatedAtDesc(Pageable pageable);
+    Page<SystemUsers> findAllByDptIdOrderByCreatedAtDesc(long dptId,Pageable pageable);
     Optional<SystemUsers> findByUsername(String username);
 
     Boolean existsByUsername(String username);

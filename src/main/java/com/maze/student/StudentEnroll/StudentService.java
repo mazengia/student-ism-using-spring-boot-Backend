@@ -1,11 +1,15 @@
 package com.maze.student.StudentEnroll;
 
-import org.springframework.hateoas.CollectionModel;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface StudentService {
-    CollectionModel<StudentDTO> findAll(int page, int size );
+    Page<StudentEnrolment> findAll(Pageable pageable);
 
-    StudentDTO enrollStudent(StudentEnrolment studentEnrolment);
+    Page<StudentEnrolment> findAllEnrolledByDptId(long dptId, Pageable pageable);
+    StudentEnrolment updateStudent(long id, StudentEnrolment studentEnrolment);
 
-    StudentDTO findStudentById(Long id);
+    StudentEnrolment enrollStudent(StudentEnrolment studentEnrolment);
+
+    StudentEnrolment findStudentById(Long id);
 }

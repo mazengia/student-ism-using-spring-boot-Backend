@@ -41,9 +41,9 @@ public class SectionsController implements SectionsApi {
     }
 
     @Override
-    public ResponseEntity<PagedModel<SectionsDto>> getAllSections(Pageable pageable, PagedResourcesAssembler assembler, JwtAuthenticationToken token, UriComponentsBuilder uriBuilder, HttpServletResponse response) {
+    public ResponseEntity<PagedModel<SectionsDto>> getAllSections(Pageable pageable, PagedResourcesAssembler assembler,   UriComponentsBuilder uriBuilder, HttpServletResponse response) {
         eventPublisher.publishEvent(new PaginatedResultsRetrievedEvent<>(
-                SectionsDto.class, uriBuilder, response, pageable.getPageNumber(), sectionsService.getAllSections(pageable, token).getTotalPages(), pageable.getPageSize()));
-        return new ResponseEntity<PagedModel<SectionsDto>>(assembler.toModel(sectionsService.getAllSections(pageable, token).map(sectionsMapper::toAppealDto)), HttpStatus.OK);
+                SectionsDto.class, uriBuilder, response, pageable.getPageNumber(), sectionsService.getAllSections(pageable).getTotalPages(), pageable.getPageSize()));
+        return new ResponseEntity<PagedModel<SectionsDto>>(assembler.toModel(sectionsService.getAllSections(pageable).map(sectionsMapper::toAppealDto)), HttpStatus.OK);
     }
 }

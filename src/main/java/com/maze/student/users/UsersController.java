@@ -16,10 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +24,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -50,7 +48,6 @@ public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginReq
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String jwt = jwtUtils.generateJwtToken(authentication);
-
     UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
     List<String> roles = userDetails.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
@@ -59,6 +56,8 @@ public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginReq
     return ResponseEntity.ok(new JwtResponse(jwt,
             userDetails.getId(),
             userDetails.getUsername(),
+            userDetails.getFirstName(),
+            userDetails.getLastName(),
             userDetails.getEmail(),
             roles));
 }
@@ -67,6 +66,16 @@ public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginReq
     public UserDto getStudentsById(long id) {
         return userMapper.toGetUsersDto(userService.getStudentsById(id));
     }
+
+
+
+    @Override
+    public ResponseEntity<PagedModel<UserDto>> getStudentsByDptId(long id,Pageable pageable, PagedResourcesAssembler assembler, UriComponentsBuilder uriBuilder, HttpServletResponse response) {
+        eventPublisher.publishEvent(new PaginatedResultsRetrievedEvent<>(
+                UserDto.class, uriBuilder, response, pageable.getPageNumber(), userService.getStudentsGroupedByDptId(id,pageable).getTotalPages(), pageable.getPageSize()));
+        return new ResponseEntity<PagedModel<UserDto>>(assembler.toModel(userService.getStudentsGroupedByDptId(id,pageable).map(userMapper::toGetUsersDto)), HttpStatus.OK);
+    }
+
     @Override
     public UserDto updateStudents(long id, UserDto userDto, JwtAuthenticationToken token) throws IllegalAccessException {
         return userMapper.toGetUsersDto(userService.updateStudents(id, userMapper.toUsers(userDto), token));
@@ -74,9 +83,9 @@ public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginReq
 
 
     @Override
-    public ResponseEntity<PagedModel<UserDto>> getAllStudents(Pageable pageable, PagedResourcesAssembler assembler, JwtAuthenticationToken token, UriComponentsBuilder uriBuilder, HttpServletResponse response) {
+    public ResponseEntity<PagedModel<UserDto>> getAllStudents(Pageable pageable, PagedResourcesAssembler assembler, UriComponentsBuilder uriBuilder, HttpServletResponse response) {
         eventPublisher.publishEvent(new PaginatedResultsRetrievedEvent<>(
-                UserDto.class, uriBuilder, response, pageable.getPageNumber(), userService.getAllStudents(pageable, token).getTotalPages(), pageable.getPageSize()));
-        return new ResponseEntity<PagedModel<UserDto>>(assembler.toModel(userService.getAllStudents(pageable, token).map(userMapper::toGetUsersDto)), HttpStatus.OK);
+                UserDto.class, uriBuilder, response, pageable.getPageNumber(), userService.getAllStudents(pageable).getTotalPages(), pageable.getPageSize()));
+        return new ResponseEntity<PagedModel<UserDto>>(assembler.toModel(userService.getAllStudents(pageable).map(userMapper::toGetUsersDto)), HttpStatus.OK);
     }
 }

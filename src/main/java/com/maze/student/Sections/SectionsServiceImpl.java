@@ -29,7 +29,7 @@ public class SectionsServiceImpl implements SectionsService {
 
 
     @Override
-    public Page<Sections> getAllSections(Pageable pageable, JwtAuthenticationToken token) {
+    public Page<Sections> getAllSections(Pageable pageable ) {
         return sectionsRepository.findAllByOrderByCreatedAtDesc(pageable);
     }
 

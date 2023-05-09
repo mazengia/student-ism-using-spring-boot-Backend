@@ -38,5 +38,4 @@ public class CourseEnroll {
     @JoinColumn(name = "courseId", referencedColumnName = "id")
     @JsonIgnoreProperties(value = {"CourseEnroll"})
     private Course course;
-
 }

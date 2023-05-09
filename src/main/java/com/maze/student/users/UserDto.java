@@ -11,6 +11,8 @@ import java.util.Set;
 public class UserDto extends Auditable {
     private Long id;
     private String username;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
     private Dpt dpt;

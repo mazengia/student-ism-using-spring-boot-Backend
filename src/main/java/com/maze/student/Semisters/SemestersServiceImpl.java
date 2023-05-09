@@ -29,7 +29,7 @@ public class SemestersServiceImpl implements SemestersService {
 
 
     @Override
-    public Page<Semesters> getAllSemesters(Pageable pageable, JwtAuthenticationToken token) {
+    public Page<Semesters> getAllSemesters(Pageable pageable) {
         return semestersRepository.findAllByOrderByCreatedAtDesc(pageable);
     }
 

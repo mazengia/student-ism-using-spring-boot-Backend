@@ -1,11 +1,20 @@
 package com.maze.student.Dpt;
 
-import org.springframework.hateoas.CollectionModel;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface DptService {
-    CollectionModel<DptDTO> findAll(int page, int size );
+    Dpt createDpt(Dpt dpt) throws IllegalAccessException;
 
-    DptDTO addDpt(Dpt dpt);
+    Dpt getDptById(long id);
 
-    DptDTO findDptById(Long id);
+    Page<Dpt> getAllDpt(Pageable pageable);
+
+    Dpt updateDpt(long id, Dpt dpt) throws IllegalAccessException;
+
+    void deleteDpt(long id);
+
+    Page<Dpt> getAllDptByDepartmentId(Pageable pageable, long id);
+
+    Page<Dpt> getAllDptByGroup(Pageable pageable, long id);
 }

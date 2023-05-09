@@ -32,7 +32,6 @@ public interface SectionsApi {
     ResponseEntity<PagedModel<SectionsDto>> getAllSections(@Parameter(description = "pagination object", schema = @Schema(implementation = Pageable.class))
                                                        @Valid Pageable pageable,
                                                            PagedResourcesAssembler assembler,
-                                                           JwtAuthenticationToken token,
                                                            UriComponentsBuilder uriBuilder,
                                                            final HttpServletResponse response);
 }

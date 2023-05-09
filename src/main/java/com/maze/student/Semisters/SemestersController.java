@@ -41,9 +41,9 @@ public class SemestersController implements SemestersApi {
     }
 
     @Override
-    public ResponseEntity<PagedModel<SemestersDto>> getAllSemesters(Pageable pageable, PagedResourcesAssembler assembler, JwtAuthenticationToken token, UriComponentsBuilder uriBuilder, HttpServletResponse response) {
+    public ResponseEntity<PagedModel<SemestersDto>> getAllSemesters(Pageable pageable, PagedResourcesAssembler assembler,    UriComponentsBuilder uriBuilder, HttpServletResponse response) {
         eventPublisher.publishEvent(new PaginatedResultsRetrievedEvent<>(
-                SemestersDto.class, uriBuilder, response, pageable.getPageNumber(), semestersService.getAllSemesters(pageable, token).getTotalPages(), pageable.getPageSize()));
-        return new ResponseEntity<PagedModel<SemestersDto>>(assembler.toModel(semestersService.getAllSemesters(pageable, token).map(semestersMapper::toSemestersDto)), HttpStatus.OK);
+                SemestersDto.class, uriBuilder, response, pageable.getPageNumber(), semestersService.getAllSemesters(pageable).getTotalPages(), pageable.getPageSize()));
+        return new ResponseEntity<PagedModel<SemestersDto>>(assembler.toModel(semestersService.getAllSemesters(pageable).map(semestersMapper::toSemestersDto)), HttpStatus.OK);
     }
 }

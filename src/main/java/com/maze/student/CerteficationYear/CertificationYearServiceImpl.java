@@ -29,14 +29,14 @@ public class CertificationYearServiceImpl implements CertificationYearService {
 
 
     @Override
-    public Page<CertificationYear> getAllBatches(Pageable pageable, JwtAuthenticationToken token) {
+    public Page<CertificationYear> getAllBatches(Pageable pageable ) {
         return certificationYearRepository.findAllByOrderByCreatedAtDesc(pageable);
     }
 
     @Override
     public CertificationYear updateBatches(long id, CertificationYear certificationYearType, JwtAuthenticationToken token) throws IllegalAccessException {
-        var et = getBatchesById(id);
 
+        var et = getBatchesById(id);
         BeanUtils.copyProperties(certificationYearType, et, getNullPropertyNames(certificationYearType));
         return certificationYearRepository.save(et);
     }

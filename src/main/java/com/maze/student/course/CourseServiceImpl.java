@@ -1,12 +1,14 @@
 package com.maze.student.course;
 
 import com.maze.student._config.exception.EntityNotFoundException;
+import com.maze.student._config.security.jwt.JwtUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -21,7 +23,8 @@ public class CourseServiceImpl implements CourseService {
     PagedResourcesAssembler pagedResourcesAssembler;
 
     @Override
-    public CollectionModel<CourseDTO> findAll(int page, int size) {
+    public CollectionModel<CourseDTO> findAll(int page, int size, Authentication authentication) {
+        System.out.println(authentication.getCredentials());
         PageRequest pageRequest;
         pageRequest = PageRequest.of(page, size);
         Page<Course> courses = courseRepository.findAll(pageRequest);

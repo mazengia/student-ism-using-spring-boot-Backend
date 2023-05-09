@@ -32,7 +32,6 @@ public interface SemestersApi {
     ResponseEntity<PagedModel<SemestersDto>> getAllSemesters(@Parameter(description = "pagination object", schema = @Schema(implementation = Pageable.class))
                                                        @Valid Pageable pageable,
                                                              PagedResourcesAssembler assembler,
-                                                             JwtAuthenticationToken token,
                                                              UriComponentsBuilder uriBuilder,
                                                              final HttpServletResponse response);
 }

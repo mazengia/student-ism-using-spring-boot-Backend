@@ -1,46 +1,56 @@
 package com.maze.student.StudentEnroll;
 
-import com.maze.student._config.security.SecuredRestController;
-import org.springframework.hateoas.CollectionModel;
+import com.maze.student._config.util.PaginatedResultsRetrievedEvent;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.servlet.http.HttpServletResponse;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/v1/student-enroll")
+@RequiredArgsConstructor
 
-public class StudentController implements SecuredRestController {
+public class StudentController implements StudentEnrollApi {
 
-    StudentService studentService;
+    private final StudentService studentService;
+    private final StudentEnrollMapper studentEnrollMapper;
+    private final ApplicationEventPublisher eventPublisher;
 
-    @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public StudentDTO addStudent(@RequestBody StudentEnrolment studentEnrolment) {
-         return studentService.enrollStudent(studentEnrolment);
+    @Override
+    public ResponseEntity<PagedModel<EnrollDto>> findAll(Pageable pageable, PagedResourcesAssembler assembler, UriComponentsBuilder uriBuilder, HttpServletResponse response) {
+        eventPublisher.publishEvent(new PaginatedResultsRetrievedEvent<>(
+                EnrollDto.class, uriBuilder, response, pageable.getPageNumber(), studentService.findAll(pageable).getTotalPages(), pageable.getPageSize()));
+        return new ResponseEntity<PagedModel<EnrollDto>>(assembler.toModel(studentService.findAll(pageable).map(studentEnrollMapper::toStudentDTO)), HttpStatus.OK);
     }
 
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
+    @Override
+    public EnrollDto addStudent(StudentEnrolment studentEnrolment) throws IllegalAccessException {
+        return studentEnrollMapper.toStudentDTO(studentService.enrollStudent(studentEnrolment));
     }
 
-    @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> findAll(
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            @RequestParam(required = false, defaultValue = "10") Integer size) {
-        CollectionModel<StudentDTO> studentDTOS = studentService.findAll(page, size);
-        if (studentDTOS != null) {
-            return ResponseEntity.ok(studentDTOS);
-        }
-        return ResponseEntity.noContent().build();
+    @Override
+    public EnrollDto findAllEnrolledByDptId(long dptId, Pageable pageable) {
+        return studentEnrollMapper.toStudentDTO((StudentEnrolment) studentService.findAllEnrolledByDptId(dptId,pageable));
     }
 
-    @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> findStudentId(@PathVariable Long id) {
-        StudentDTO studentDTO = studentService.findStudentById(id);
-        if (studentDTO != null) return ResponseEntity.ok(studentDTO);
-        return ResponseEntity.noContent().build();
+
+    @Override
+    public EnrollDto findStudentId(Long id) {
+        return studentEnrollMapper.toStudentDTO(  studentService.findStudentById(id));
+
+    }
+
+    @Override
+    public EnrollDto updateStudent(long id, StudentEnrolment studentEnrolment) throws IllegalAccessException {
+        return studentEnrollMapper.toStudentDTO(studentService.updateStudent(id,  studentEnrolment) );
+
     }
 }

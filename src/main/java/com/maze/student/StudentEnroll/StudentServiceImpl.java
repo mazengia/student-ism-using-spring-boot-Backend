@@ -1,46 +1,47 @@
 package com.maze.student.StudentEnroll;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
+
+import static com.maze.student._config.util.Util.getNullPropertyNames;
 
 @Service
 @AllArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
     StudentRepository studentRepository;
-    StudentAssembler studentAssembler;
     PagedResourcesAssembler pagedResourcesAssembler;
 
     @Override
-    public CollectionModel<StudentDTO> findAll(int page, int size) {
-        PageRequest pageRequest;
-        pageRequest = PageRequest.of(page, size);
-        Page<StudentEnrolment> studentEnrolments = studentRepository.findAll(pageRequest);
-        if (!CollectionUtils.isEmpty(studentEnrolments.getContent()))
-            return pagedResourcesAssembler.toModel(
-                    studentEnrolments, studentAssembler);
+    public Page<StudentEnrolment> findAll(Pageable pageable) {
+        return studentRepository.findAll(pageable);
+    }
 
-        return null;
+
+    @Override
+    public Page<StudentEnrolment> findAllEnrolledByDptId(long dptId, Pageable pageable) {
+        return studentRepository.findByStudentDptId(dptId,pageable);
     }
 
     @Override
-    public StudentDTO enrollStudent(StudentEnrolment studentEnrolment) {
-        return studentAssembler.toModel(
-                studentRepository.save(studentEnrolment)
-        );
+    public StudentEnrolment enrollStudent(StudentEnrolment studentEnrolment) {
+        return  studentRepository.save(studentEnrolment);
     }
 
     @Override
-    public StudentDTO findStudentById(Long id) {
-        StudentEnrolment studentEnrolment = studentRepository.findById(id).orElse(null);
-        if (studentEnrolment != null) {
-            return studentAssembler.toModel(studentEnrolment);
+    public StudentEnrolment findStudentById(Long id) {
+        return studentRepository.findById(id).orElse(null);
+    }
+    @Override
+    public StudentEnrolment updateStudent(long id, StudentEnrolment studentEnrolment) {
+        StudentEnrolment oldData = studentRepository.findById(id);
+        if (oldData != null) {
+            BeanUtils.copyProperties(studentEnrolment,oldData,getNullPropertyNames(studentEnrolment));
+            return  enrollStudent(oldData);
         }
-        return null;
-    }
+        return null;    }
 }
