@@ -58,8 +58,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
 
     @ResponseStatus(BAD_REQUEST)
-    @ExceptionHandler(BudgetException.class)
-    protected ResponseEntity<Object> handleBudgetException(BudgetException ex) {
+    @ExceptionHandler(AlreadyExistException.class)
+    protected ResponseEntity<Object> handleBudgetException(AlreadyExistException ex) {
         return buildResponseEntity(new ApiError(BAD_REQUEST, ex.getMessage(),ex));
     }
 

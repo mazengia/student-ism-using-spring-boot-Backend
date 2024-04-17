@@ -2,7 +2,8 @@ package com.maze.student.course;
 
 import com.maze.student.CourseEnroll.CourseEnroll;
 import com.maze.student.Department.Department;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 

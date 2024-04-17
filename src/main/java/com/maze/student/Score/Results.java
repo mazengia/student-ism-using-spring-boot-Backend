@@ -3,7 +3,7 @@ package com.maze.student.Score;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.maze.student.CourseEnroll.CourseEnroll;
 import com.maze.student.StudentEnroll.StudentEnrolment;
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 

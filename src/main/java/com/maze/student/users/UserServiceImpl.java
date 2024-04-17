@@ -3,27 +3,20 @@ package com.maze.student.users;
 
 import com.maze.student.Role.Roles;
 import com.maze.student.Role.RolesRepository;
+import com.maze.student._config.exception.AlreadyExistException;
 import com.maze.student._config.exception.EntityNotFoundException;
-import com.maze.student._config.security.jwt.JwtUtils;
 import com.maze.student._config.security.services.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static com.maze.student._config.util.Util.getNullPropertyNames;
 
@@ -36,21 +29,15 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
 
-    private final AuthenticationManager authenticationManager;
-    private final JwtUtils jwtUtils;
-
     @Override
-    public ResponseEntity<MessageResponse> createStudents(SystemUsers signupRequest) throws IllegalAccessException {
+    public SystemUsers createStudents(SystemUsers signupRequest ,UsernamePasswordAuthenticationToken token) throws IllegalAccessException {
+       UserDetailsImpl userDetails= (UserDetailsImpl) token.getPrincipal();
         if (userRepository.existsByUsername(signupRequest.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+            throw new AlreadyExistException("User name '" + signupRequest.getUsername() + "' is already exist");
         }
 
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
+            throw new AlreadyExistException("Email '" + signupRequest.getEmail() + "' is already exist");
         }
 
         Set<Roles> strRoles = signupRequest.getRole();
@@ -63,8 +50,10 @@ public class UserServiceImpl implements UserService {
             });
         signupRequest.setPassword(encoder.encode(signupRequest.getPassword()));
         signupRequest.setRole(roles);
-        userRepository.save(signupRequest);
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        signupRequest.setUpdatedBy(userDetails.getUsername());
+        signupRequest.setCreatedBy(userDetails.getUsername());
+        signupRequest.setUpdatedBy(userDetails.getUsername());
+     return    userRepository.save(signupRequest);
     }
 
 
@@ -81,10 +70,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SystemUsers updateStudents(long id, SystemUsers systemUsers, JwtAuthenticationToken token) throws IllegalAccessException {
+    public SystemUsers updateStudents(long id, SystemUsers systemUsers, UsernamePasswordAuthenticationToken token ) throws IllegalAccessException {
         var et = getStudentsById(id);
-
+        UserDetailsImpl userDetails= (UserDetailsImpl) token.getPrincipal();
+        System.out.println(userDetails);
         BeanUtils.copyProperties(systemUsers, et, getNullPropertyNames(systemUsers));
+        et.setUpdatedBy(userDetails.getUsername());
         return userRepository.save(et);
     }
 

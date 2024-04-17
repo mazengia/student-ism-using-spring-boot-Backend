@@ -3,7 +3,6 @@ package com.maze.student.Department;
 import com.maze.student._config.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

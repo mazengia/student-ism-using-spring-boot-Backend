@@ -30,10 +30,10 @@ public class RolesServiceImpl implements RolesService {
     }
 
     @Override
-    public RolesDTO addRoles(Roles roles) {
-        return rolesAssembler.toModel(
-                rolesRepository.save(roles)
-        );
+    public Roles  addRoles(Roles roles) {
+        System.out.println("roles");
+        System.out.println(roles);
+        return  rolesRepository.save(roles);
     }
 
     @Override

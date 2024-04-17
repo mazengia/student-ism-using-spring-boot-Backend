@@ -5,7 +5,7 @@ import com.maze.student.CerteficationYear.CertificationYear;
 import com.maze.student.Dpt.Dpt;
 import com.maze.student.Semisters.Semesters;
 import com.maze.student.course.Course;
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 

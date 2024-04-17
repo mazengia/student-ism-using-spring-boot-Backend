@@ -1,6 +1,5 @@
 package com.maze.student.course;
 
-import com.maze.student._config.security.jwt.JwtUtils;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

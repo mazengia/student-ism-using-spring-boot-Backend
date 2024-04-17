@@ -1,6 +1,6 @@
 package com.maze.student.Program;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 

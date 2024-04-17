@@ -1,8 +1,8 @@
 package com.maze.student._config.databaseSeeder;
 
-import com.maze.student.Program.Programs;
 import com.maze.student.Program.ProgramRepository;
 import com.maze.student.Program.ProgramServiceImpl;
+import com.maze.student.Program.Programs;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;

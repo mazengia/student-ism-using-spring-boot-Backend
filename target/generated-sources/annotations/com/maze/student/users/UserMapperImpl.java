@@ -4,13 +4,12 @@ import com.maze.student.Role.Roles;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.annotation.processing.Generated;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-05-09T15:25:50+0300",
-    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19 (Oracle Corporation)"
+    date = "2024-04-15T14:19:52+0300",
+    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
@@ -47,40 +46,29 @@ public class UserMapperImpl implements UserMapper {
     }
 
     @Override
-    public UserDto toUsersDto(ResponseEntity<MessageResponse> users) {
+    public UserDto toUsersDto(SystemUsers users) {
         if ( users == null ) {
             return null;
         }
 
         UserDto userDto = new UserDto();
 
-        return userDto;
-    }
-
-    @Override
-    public UserDto toGetUsersDto(SystemUsers systemUsers) {
-        if ( systemUsers == null ) {
-            return null;
-        }
-
-        UserDto userDto = new UserDto();
-
-        userDto.setDeletedAt( systemUsers.getDeletedAt() );
-        userDto.setDeleted( systemUsers.isDeleted() );
-        userDto.setVersion( systemUsers.getVersion() );
-        userDto.setCreatedBy( systemUsers.getCreatedBy() );
-        userDto.setUpdatedBy( systemUsers.getUpdatedBy() );
-        userDto.setCreatedAt( systemUsers.getCreatedAt() );
-        userDto.setUpdatedAt( systemUsers.getUpdatedAt() );
-        userDto.setRemark( systemUsers.getRemark() );
-        userDto.setId( systemUsers.getId() );
-        userDto.setUsername( systemUsers.getUsername() );
-        userDto.setFirstName( systemUsers.getFirstName() );
-        userDto.setLastName( systemUsers.getLastName() );
-        userDto.setEmail( systemUsers.getEmail() );
-        userDto.setPassword( systemUsers.getPassword() );
-        userDto.setDpt( systemUsers.getDpt() );
-        Set<Roles> set = systemUsers.getRole();
+        userDto.setDeletedAt( users.getDeletedAt() );
+        userDto.setDeleted( users.isDeleted() );
+        userDto.setVersion( users.getVersion() );
+        userDto.setCreatedBy( users.getCreatedBy() );
+        userDto.setUpdatedBy( users.getUpdatedBy() );
+        userDto.setCreatedAt( users.getCreatedAt() );
+        userDto.setUpdatedAt( users.getUpdatedAt() );
+        userDto.setRemark( users.getRemark() );
+        userDto.setId( users.getId() );
+        userDto.setUsername( users.getUsername() );
+        userDto.setFirstName( users.getFirstName() );
+        userDto.setLastName( users.getLastName() );
+        userDto.setEmail( users.getEmail() );
+        userDto.setPassword( users.getPassword() );
+        userDto.setDpt( users.getDpt() );
+        Set<Roles> set = users.getRole();
         if ( set != null ) {
             userDto.setRole( new LinkedHashSet<Roles>( set ) );
         }

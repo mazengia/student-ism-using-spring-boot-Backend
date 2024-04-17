@@ -1,6 +1,6 @@
 package com.maze.student.Role;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

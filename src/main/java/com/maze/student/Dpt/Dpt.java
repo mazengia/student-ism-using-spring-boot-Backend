@@ -1,10 +1,10 @@
 package com.maze.student.Dpt;
 
+import com.maze.student.CertificationType.Certifications;
 import com.maze.student.CourseEnroll.CourseEnroll;
 import com.maze.student.Department.Department;
 import com.maze.student.Program.Programs;
-import com.maze.student.CertificationType.Certifications;
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 

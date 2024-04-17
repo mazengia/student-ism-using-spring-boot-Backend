@@ -27,28 +27,22 @@ import java.util.Collections;
 @AllArgsConstructor
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-        // securedEnabled = true,
-        // jsr250Enabled = true,
-        prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    UserDetailsServiceImpl userDetailsService;
-    private AuthEntryPointJwt unauthorizedHandler;
 
-    @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
-    }
+    private final UserDetailsServiceImpl userDetailsService;
+    private final AuthEntryPointJwt unauthorizedHandler;
 
     @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
+    protected void configure(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests()
+                .mvcMatchers("/users/sign-in").permitAll()
+                .anyRequest().authenticated();
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
@@ -63,10 +57,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         );
     }
 
-    private static final String[] SWAGGER_WHITELIST = {
-            "/api/v1/users/sign-in",
-            "/api/v1/users/signup"
-    };
+    @Bean
+    public AuthTokenFilter authenticationJwtTokenFilter() {
+        return new AuthTokenFilter();
+    }
+
+    @Override
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -74,46 +73,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
-                .mvcMatchers(SWAGGER_WHITELIST).permitAll()
-                .anyRequest().authenticated();
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.setAllowedOrigins(Arrays.asList("http://10.1.12.70:4900", "http://localhost:4200"));
-        configuration.setAllowedMethods(
-                Arrays.asList(
-                        "GET",
-                        "POST",
-                        "OPTIONS",
-                        "DELETE",
-                        "PUT",
-                        "PATCH")
-        );
-        configuration.setAllowedHeaders(
-                Arrays.asList(
-                        "X-XSRF-TOKEN",
-                        "X-Requested-With",
-                        "Origin",
-                        "Content-Type",
-                        "Accept",
-                        "Authorization"
-                )
-        );
+        configuration.setAllowedOrigins(Arrays.asList("http://10.1.12.70:4900", "http://localhost:3000"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
+        configuration.setAllowedHeaders(Arrays.asList("X-XSRF-TOKEN", "X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
         configuration.setAllowCredentials(true);
-        configuration.setExposedHeaders(
-                Collections.singletonList("Authorization")
-        );
+        configuration.setExposedHeaders(Collections.singletonList("Authorization"));
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
+
         return source;
     }
 }

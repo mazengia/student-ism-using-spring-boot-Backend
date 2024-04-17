@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 //@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/v1/role")
+@RequestMapping("/role")
 public class RolesController  implements SecuredRestController {
 
     RolesService rolesService;
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public RolesDTO addRoles(@Valid @RequestBody Roles roles) {
+//    @PreAuthorize("hasRole('ADMIN')")
+    public Roles addRoles( @RequestBody Roles roles) {
          return rolesService.addRoles(roles);
     }
 
@@ -28,7 +28,7 @@ public class RolesController  implements SecuredRestController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> findAll(
             @RequestParam(required = false, defaultValue = "0") Integer page,
             @RequestParam(required = false, defaultValue = "10") Integer size) {

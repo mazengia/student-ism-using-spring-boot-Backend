@@ -48,6 +48,7 @@ public abstract class Auditable implements Serializable {
     @Schema(hidden = true)
     @Column(name = "updated_at")
     @LastModifiedDate
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt=LocalDateTime.now();
     private String remark;
+
 }

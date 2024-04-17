@@ -1,6 +1,6 @@
 package com.maze.student.CertificationType;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 

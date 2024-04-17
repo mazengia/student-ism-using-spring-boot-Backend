@@ -2,18 +2,18 @@ package com.maze.student._config.security.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.maze.student.users.SystemUsers;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 @Data
+@AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -25,17 +25,6 @@ public class UserDetailsImpl implements UserDetails {
     @JsonIgnore
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
-
-    public UserDetailsImpl(Long id, String username, String firstName, String lastName, String email, String password,
-                           Collection<? extends GrantedAuthority> authorities) {
-        this.id = id;
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.authorities = authorities;
-    }
 
     public static UserDetailsImpl build(SystemUsers systemUsers) {
         List<GrantedAuthority> authorities = systemUsers.getRole().stream()

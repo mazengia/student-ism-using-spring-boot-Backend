@@ -1,7 +1,6 @@
 package com.maze.student.course;
 
 import com.maze.student._config.exception.EntityNotFoundException;
-import com.maze.student._config.security.jwt.JwtUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;

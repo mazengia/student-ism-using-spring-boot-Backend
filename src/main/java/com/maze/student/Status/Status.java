@@ -2,8 +2,6 @@ package com.maze.student.Status;
 
 import com.maze.student._config.util.Auditable;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
