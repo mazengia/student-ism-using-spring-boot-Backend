@@ -1,6 +1,6 @@
 package com.maze.student.Role;
 
-import com.maze.student._config.exception.ResourceNotFoundException;
+import com.maze.student.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,8 +31,6 @@ public class RolesServiceImpl implements RolesService {
 
     @Override
     public Roles  addRoles(Roles roles) {
-        System.out.println("roles");
-        System.out.println(roles);
         return  rolesRepository.save(roles);
     }
 

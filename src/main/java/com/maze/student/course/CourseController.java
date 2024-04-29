@@ -1,6 +1,6 @@
 package com.maze.student.course;
 
-import com.maze.student._config.security.SecuredRestController;
+import com.maze.student.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

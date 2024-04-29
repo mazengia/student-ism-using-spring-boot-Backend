@@ -1,9 +1,9 @@
 package com.maze.student.users;
 
-import com.maze.student._config.security.jwt.JwtResponse;
-import com.maze.student._config.security.jwt.JwtUtils;
-import com.maze.student._config.security.services.UserDetailsImpl;
-import com.maze.student._config.util.PaginatedResultsRetrievedEvent;
+import com.maze.student.security.jwt.JwtResponse;
+import com.maze.student.security.jwt.JwtUtils;
+import com.maze.student.security.services.UserDetailsImpl;
+import com.maze.student.util.PaginatedResultsRetrievedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Pageable;
@@ -16,15 +16,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,13 +36,12 @@ public class UsersController implements UserApi {
     private final JwtUtils jwtUtils;
 
     @Override
-    public UserDto createStudents(UserDto userDto,UsernamePasswordAuthenticationToken token) throws IllegalAccessException {
-        return userMapper.toUsersDto(userService.createStudents(userMapper.toUsers(userDto),token));
+    public UserDto createStudents(UserDto userDto, UsernamePasswordAuthenticationToken token) throws IllegalAccessException {
+        return userMapper.toUsersDto(userService.createStudents(userMapper.toUsers(userDto), token));
     }
 
-
-    @PostMapping("/sign-in")
-    public JwtResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    @Override
+    public JwtResponse authenticateUser(LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -82,10 +77,9 @@ public class UsersController implements UserApi {
     }
 
     @Override
-    public UserDto updateStudents(long id, UserDto userDto, UsernamePasswordAuthenticationToken token) throws IllegalAccessException {
-        return userMapper.toUsersDto(userService.updateStudents(id, userMapper.toUsers(userDto),token));
+    public SystemUsers updateStudents(long id, SystemUsers userDto, Authentication token) throws IllegalAccessException {
+        return userService.updateStudents(id, userDto, token);
     }
-
 
     @Override
     public ResponseEntity<PagedModel<UserDto>> getAllStudents(Pageable pageable, PagedResourcesAssembler assembler, UriComponentsBuilder uriBuilder, HttpServletResponse response) {
@@ -93,4 +87,6 @@ public class UsersController implements UserApi {
                 UserDto.class, uriBuilder, response, pageable.getPageNumber(), userService.getAllStudents(pageable).getTotalPages(), pageable.getPageSize()));
         return new ResponseEntity<PagedModel<UserDto>>(assembler.toModel(userService.getAllStudents(pageable).map(userMapper::toUsersDto)), HttpStatus.OK);
     }
+
+
 }

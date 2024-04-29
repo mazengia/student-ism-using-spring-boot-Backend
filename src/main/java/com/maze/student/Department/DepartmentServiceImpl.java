@@ -1,8 +1,8 @@
 package com.maze.student.Department;
 
 
-import com.maze.student._config.exception.EntityNotFoundException;
-import com.maze.student._config.util.Util;
+import com.maze.student.exception.EntityNotFoundException;
+import com.maze.student.util.Util;
 import com.maze.student.course.Course;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;

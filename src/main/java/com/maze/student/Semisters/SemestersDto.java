@@ -1,6 +1,6 @@
 package com.maze.student.Semisters;
 
-import com.maze.student._config.util.Auditable;
+import com.maze.student.util.Auditable;
 import lombok.Data;
 
 @Data

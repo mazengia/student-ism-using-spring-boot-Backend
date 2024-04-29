@@ -1,13 +1,11 @@
 package com.maze.student.Role;
 
-import com.maze.student._config.security.SecuredRestController;
+import com.maze.student.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 //@CrossOrigin(origins = "http://localhost:4200")
 //@CrossOrigin(origins = "*", maxAge = 3600)

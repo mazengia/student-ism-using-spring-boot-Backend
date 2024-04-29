@@ -3,14 +3,15 @@ package com.maze.student.users;
 
 import com.maze.student.Role.Roles;
 import com.maze.student.Role.RolesRepository;
-import com.maze.student._config.exception.AlreadyExistException;
-import com.maze.student._config.exception.EntityNotFoundException;
-import com.maze.student._config.security.services.UserDetailsImpl;
+import com.maze.student.exception.AlreadyExistException;
+import com.maze.student.exception.EntityNotFoundException;
+import com.maze.student.security.services.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.maze.student._config.util.Util.getNullPropertyNames;
+import static com.maze.student.util.Util.getNullPropertyNames;
 
 
 @Service
@@ -70,10 +71,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SystemUsers updateStudents(long id, SystemUsers systemUsers, UsernamePasswordAuthenticationToken token ) throws IllegalAccessException {
+    public SystemUsers updateStudents(long id, SystemUsers systemUsers, Authentication token ) throws IllegalAccessException {
         var et = getStudentsById(id);
         UserDetailsImpl userDetails= (UserDetailsImpl) token.getPrincipal();
-        System.out.println(userDetails);
+        systemUsers.setPassword(encoder.encode(systemUsers.getPassword()));
         BeanUtils.copyProperties(systemUsers, et, getNullPropertyNames(systemUsers));
         et.setUpdatedBy(userDetails.getUsername());
         return userRepository.save(et);

@@ -1,6 +1,6 @@
 package com.maze.student.course;
 
-import com.maze.student._config.exception.EntityNotFoundException;
+import com.maze.student.exception.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -11,7 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import static com.maze.student._config.util.Util.getNullPropertyNames;
+import static com.maze.student.util.Util.getNullPropertyNames;
 
 @Service
 @AllArgsConstructor
@@ -23,7 +23,6 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public CollectionModel<CourseDTO> findAll(int page, int size, Authentication authentication) {
-        System.out.println(authentication.getCredentials());
         PageRequest pageRequest;
         pageRequest = PageRequest.of(page, size);
         Page<Course> courses = courseRepository.findAll(pageRequest);

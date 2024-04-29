@@ -1,6 +1,6 @@
 package com.maze.student.Department;
 
-import com.maze.student._config.security.SecuredRestController;
+import com.maze.student.security.SecuredRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

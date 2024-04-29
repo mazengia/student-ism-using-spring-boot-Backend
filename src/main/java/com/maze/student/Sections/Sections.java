@@ -1,7 +1,7 @@
 package com.maze.student.Sections;
 
 
-import com.maze.student._config.util.Auditable;
+import com.maze.student.util.Auditable;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;

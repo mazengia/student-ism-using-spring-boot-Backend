@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.stereotype.Service;
 
-import static com.maze.student._config.util.Util.getNullPropertyNames;
+import static com.maze.student.util.Util.getNullPropertyNames;
 
 @Service
 @AllArgsConstructor

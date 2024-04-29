@@ -1,13 +1,13 @@
 package com.maze.student.Dpt;
 
-import com.maze.student._config.exception.EntityNotFoundException;
+import com.maze.student.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import static com.maze.student._config.util.Util.getNullPropertyNames;
+import static com.maze.student.util.Util.getNullPropertyNames;
 
 
 @Service

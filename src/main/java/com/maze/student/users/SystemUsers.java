@@ -2,7 +2,7 @@ package com.maze.student.users;
 
 import com.maze.student.Dpt.Dpt;
 import com.maze.student.Role.Roles;
-import com.maze.student._config.util.Auditable;
+import com.maze.student.util.Auditable;
 import lombok.Data;
 
 import javax.persistence.*;

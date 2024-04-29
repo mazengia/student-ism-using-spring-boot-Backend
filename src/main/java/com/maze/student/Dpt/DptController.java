@@ -1,6 +1,6 @@
 package com.maze.student.Dpt;
 
-import com.maze.student._config.util.PaginatedResultsRetrievedEvent;
+import com.maze.student.util.PaginatedResultsRetrievedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Pageable;

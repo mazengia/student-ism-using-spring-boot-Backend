@@ -1,6 +1,6 @@
 package com.maze.student.CertificationType;
 
-import com.maze.student._config.exception.ResourceNotFoundException;
+import com.maze.student.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
